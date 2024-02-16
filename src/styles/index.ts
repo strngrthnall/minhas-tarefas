@@ -6,6 +6,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: Roboto, sans-serif;
+    list-style: none;
+  }
+
+  textarea:focus, input:focus {
+    outline: 1px solid #000;
   }
 `
 
