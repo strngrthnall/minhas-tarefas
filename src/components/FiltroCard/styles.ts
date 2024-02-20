@@ -1,15 +1,16 @@
-import { Props } from '.'
-
 import styled from 'styled-components'
 
-type PropsSelected = Omit<Props, 'contador' | 'legenda'>
+type Props = {
+  active: boolean
+}
 
-export const Card = styled.div<PropsSelected>`
+export const Card = styled.div<Props>`
   padding: 8px;
-  border: solid 1px ${(props) => (props.ativo ? '#1e90ff' : '#a1a1a1')};
+  border: solid 1px ${(props) => (props.active ? '#88C0D0' : '#4C566A')};
   border-radius: 8px;
-  background-color: ${(props) => (props.ativo ? '#ffffff' : '#fcfcfc')};
-  color: ${(props) => (props.ativo ? '#1e90ff' : '#5e5e5e')};
+  background-color: ${(props) => (props.active ? '#ffffff' : '#fcfcfc')};
+  color: ${(props) => (props.active ? '#88C0D0' : '#4C566A')};
+  cursor: pointer;
 `
 
 export const Contador = styled.span`

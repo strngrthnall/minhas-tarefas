@@ -1,44 +1,58 @@
+import { useSelector } from 'react-redux'
+
 import Task from '../../components/Task'
-
 import * as S from './styles'
+import { RootReducer } from '../../store'
 
-const tasks = [
-  {
-    title: 'Estudar Typescript',
-    description: 'Ver aula 3 da EBAC',
-    priority: 'importante',
-    stats: 'pendente'
-  },
-  {
-    title: 'Pagar conta da Internet',
-    description: 'Baixar fatura no  email',
-    priority: 'urgente',
-    stats: 'concluida'
-  },
-  {
-    title: 'Ir para academia',
-    description: 'Fazer treino B',
-    priority: 'importante',
-    stats: 'pendente'
+const ToDoList = () => {
+  const { itens } = useSelector((state: RootReducer) => state.tasks)
+  const { term, criteria, value } = useSelector(
+    (state: RootReducer) => state.filter
+  )
+
+  const filterTasks = () => {
+    let filteredTasks = itens
+
+    if (term !== undefined) {
+      filteredTasks = filteredTasks.filter(
+        (item) => item.title.toLowerCase().search(term.toLowerCase()) >= 0
+      )
+      if (criteria === 'prioridade') {
+        filteredTasks = filteredTasks.filter((item) => item.priority === value)
+      } else if (criteria === 'status') {
+        filteredTasks = filteredTasks.filter((item) => item.status === value)
+      }
+      return filteredTasks
+    } else {
+      return itens
+    }
   }
-]
 
-const ToDoList = () => (
-  <S.Container>
-    <p>2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;termo&ldquo;</p>
-    <ul>
-      {tasks.map((t) => (
-        <li key={t.title}>
-          <Task
-            title={t.description}
-            priority={t.priority}
-            stats={t.stats}
-            description={t.description}
-          />
-        </li>
-      ))}
-    </ul>
-  </S.Container>
-)
+  return (
+    <S.Container>
+      <p>
+        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
+      </p>
+      <ul>
+        <li>{term}</li>
+        <li>{criteria}</li>
+        <li>{value}</li>
+      </ul>
+      <ul>
+        {filterTasks().map((i) => (
+          <li key={i.title}>
+            <Task
+              id={i.id}
+              title={i.title}
+              priority={i.priority}
+              status={i.status}
+              description={i.description}
+            />
+          </li>
+        ))}
+      </ul>
+    </S.Container>
+  )
+}
 
 export default ToDoList
