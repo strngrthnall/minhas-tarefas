@@ -28,18 +28,31 @@ const ToDoList = () => {
     }
   }
 
+  const showFilterResult = (amount: number) => {
+    let messenge = ''
+
+    const complement =
+      term !== undefined && term?.length > 0 ? `e busca por: "${term}"` : ''
+
+    const plural = amount > 1 || amount == 0 ? 's' : ''
+
+    if (criteria === 'todas') {
+      messenge = `${amount} tarefa${plural} encontrada${plural} como: "todas", ${complement}`
+    } else {
+      messenge = `${amount} tarefa${plural} encontrada${plural} com ${`${criteria}: "${value}`}", ${complement}`
+    }
+
+    return messenge
+  }
+
+  const tasks = filterTasks()
+  const messenge = showFilterResult(tasks.length)
+
   return (
     <S.Container>
-      <p>
-        2 tarefas marcadas como: &quot;categoria&ldquo; e &quot;{term}&ldquo;
-      </p>
+      <S.Result>{messenge}</S.Result>
       <ul>
-        <li>{term}</li>
-        <li>{criteria}</li>
-        <li>{value}</li>
-      </ul>
-      <ul>
-        {filterTasks().map((i) => (
+        {tasks.map((i) => (
           <li key={i.title}>
             <Task
               id={i.id}

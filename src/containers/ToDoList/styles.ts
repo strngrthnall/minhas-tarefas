@@ -7,3 +7,11 @@ export const Container = styled.main`
   overflow-y: scroll;
   background-color: ${variables.white};
 `
+
+export const Result = styled.p`
+  display: block;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  font-weight: bold;
+`
