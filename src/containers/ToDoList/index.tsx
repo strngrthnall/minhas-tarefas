@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
 import Task from '../../components/Task'
-import * as S from './styles'
+import { MainContainer, Title } from '../../styles/index'
 import { RootReducer } from '../../store'
 
 const ToDoList = () => {
@@ -37,9 +37,9 @@ const ToDoList = () => {
     const plural = amount > 1 || amount == 0 ? 's' : ''
 
     if (criteria === 'todas') {
-      messenge = `${amount} tarefa${plural} encontrada${plural} como: "todas", ${complement}`
+      messenge = `${amount} tarefa${plural} encontrada${plural} como: "todas" ${complement}`
     } else {
-      messenge = `${amount} tarefa${plural} encontrada${plural} com ${`${criteria}: "${value}`}", ${complement}`
+      messenge = `${amount} tarefa${plural} encontrada${plural} com ${`${criteria}: "${value}`}" ${complement}`
     }
 
     return messenge
@@ -49,8 +49,8 @@ const ToDoList = () => {
   const messenge = showFilterResult(tasks.length)
 
   return (
-    <S.Container>
-      <S.Result>{messenge}</S.Result>
+    <MainContainer>
+      <Title as="p">{messenge}</Title>
       <ul>
         {tasks.map((i) => (
           <li key={i.title}>
@@ -64,7 +64,7 @@ const ToDoList = () => {
           </li>
         ))}
       </ul>
-    </S.Container>
+    </MainContainer>
   )
 }
 

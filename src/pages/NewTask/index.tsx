@@ -1,5 +1,14 @@
+import Form from '../../containers/Form'
+import SideBar from '../../containers/SideBar'
+
 const NewTask = () => {
-  return <div>nova Tarefa</div>
+  return (
+    <>
+      {/*barra lateral*/}
+      <SideBar showFilters={false} />
+      <Form />
+    </>
+  )
 }
 
 export default NewTask

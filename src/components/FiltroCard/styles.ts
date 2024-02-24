@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import variables from '../../styles/variables'
 
 type Props = {
   active: boolean
@@ -6,10 +7,12 @@ type Props = {
 
 export const Card = styled.div<Props>`
   padding: 8px;
-  border: solid 1px ${(props) => (props.active ? '#88C0D0' : '#4C566A')};
+  border: solid 1px
+    ${(props) => (props.active ? `${variables.blue}` : `${variables.grey}`)};
   border-radius: 8px;
   background-color: ${(props) => (props.active ? '#ffffff' : '#fcfcfc')};
-  color: ${(props) => (props.active ? '#88C0D0' : '#4C566A')};
+  color: ${(props) =>
+    props.active ? `${variables.blue}` : `${variables.grey}`};
   cursor: pointer;
 `
 
